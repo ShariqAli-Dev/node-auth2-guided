@@ -1,4 +1,4 @@
-const db = require("../../database/connection.js");
+const db = require('../../database/connection.js');
 
 module.exports = {
   add,
@@ -8,27 +8,27 @@ module.exports = {
 };
 
 function find() {
-  return db("users as u")
-    .join("roles as r", "u.role", "=", "r.id")
-    .select("u.id", "u.username", "r.name as role");
+  return db('users as u')
+    .join('roles as r', 'u.role', '=', 'r.id')
+    .select('u.id', 'u.username', 'r.name as role');
 }
 
 function findBy(filter) {
-  return db("users as u")
-    .join("roles as r", "u.role", "=", "r.id")
-    .select("u.id", "u.username", "r.name as role", "u.password")
+  return db('users as u')
+    .join('roles as r', 'u.role', '=', 'r.id')
+    .select('u.id', 'u.username', 'r.name as role', 'u.password')
     .where(filter);
 }
 
 async function add(user) {
-  const [id] = await db("users").insert(user);
+  const [id] = await db('users').insert(user);
   return findById(id);
 }
 
 function findById(id) {
-  return db("users as u")
-    .join("roles as r", "u.role", "=", "r.id")
-    .select("u.id", "u.username", "r.name as role")
-    .where("u.id", id)
+  return db('users as u')
+    .join('roles as r', 'u.role', '=', 'r.id')
+    .select('u.id', 'u.username', 'r.name as role')
+    .where('u.id', id)
     .first();
 }
